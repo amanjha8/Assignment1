@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html  ng-app="Assignapp">
+  <head>
+    <meta charset="utf-8">
+
+
+    <script src="angular.min.js"></script>
+    <script >
+
+    (function (){
+      'use strict';
+    angular.module('Assignapp',[])
+    .controller('EatController',EatController);
+    EatController.$inject['$scope'];
+
+    function EatController($scope){
+      $scope.foodName="";
+      $scope.message="";
+
+      $scope.checkFood=function(){
+        var fooditems=noOfItems($scope.foodName);
+        if(fooditems==-1)
+        {
+          $scope.message="Please dont add empty item(s)";
+        }
+        else if(fooditems<=3)
+        {
+          $scope.message="Healthy";
+        }
+        else{
+          $scope.message="Sorry too much";
+        }
+              $scope.foodName="";
+      };
+
+
+      function noOfItems(string){
+        var allitems =string.split(',');
+        for(var i=0;i<allitems.length;i++)
+        {
+          if(allitems[i]=="" || allitems[i]==" ")
+          return -1;
+        }
+        return (allitems.length);
+      }
+
+    }
+    }) ();
+
+    </script>
+
+
+    <style media="screen">
+    body{
+      background-image:url("food3.jpg");
+      color:"white";
+    }
+    #newClass{
+      font-size: 30px;
+      font-family: sans-serif;
+      border: 2px solid black;
+      width:600px;
+    }
+    </style>
+
+
+    <title>My First Assignment</title>
+  </head>
+
+    <body>
+      <h1  align="center" font-size=40px><u>EATING CALCULATOR</u></h1>
+    <div align="center" ng-controller="EatController">
+      <div id="newClass">ENTER FOODITEMS U EAT IN ONE SITTING:</div>
+      <p><p>
+      <input type="text" ng-model="foodName"><br>
+
+        <div id="newClass">{{message}}</div><p>
+
+      <button name="button" ng-click="checkFood()">Check if Too Much</button>
+      </div>
+  </body>
+
+
+</html>
